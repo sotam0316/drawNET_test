@@ -1,0 +1,99 @@
+.floating-window {
+    position: fixed;
+    background: var(--sidebar-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: win-appear 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes win-appear {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.win-header {
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--panel-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: grab;
+    user-select: none;
+}
+
+.win-header:active {
+    cursor: grabbing;
+}
+
+.win-title {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.win-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.win-btn {
+    background: transparent;
+    border: none;
+    color: var(--sub-text);
+    cursor: pointer;
+    font-size: 12px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.win-btn:hover {
+    background: var(--item-hover-bg);
+    color: var(--text-color);
+}
+
+.win-btn.win-close:hover {
+    background: #ef4444;
+    color: white;
+}
+
+.floating-window.minimized {
+    height: 48px !important;
+    width: 250px !important;
+}
+
+.floating-window.minimized .win-body {
+    display: none;
+}
+
+.win-body {
+    flex: 1;
+    overflow: auto;
+    padding: 20px;
+}
+
+/* Studio Specific Polish */
+.studio-container {
+    height: 100%;
+}
+
+.studio-modal .preview-area {
+    min-height: 200px;
+}
+
+[data-theme='dark'] .floating-window {
+    background: rgba(15, 23, 42, 0.8);
+}

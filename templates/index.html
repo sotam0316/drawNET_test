@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drawNET Generator | Integrated</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
+    <!-- Icons & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Markdown Renderer -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="/static/css/modules/header.css">
+    <link rel="stylesheet" href="/static/css/modules/assets.css">
+    <link rel="stylesheet" href="/static/css/modules/studio.css">
+    <link rel="stylesheet" href="/static/css/modules/analysis.css">
+    <link rel="stylesheet" href="/static/css/modules/layers.css">
+    <!-- Graph Engine & Extensions (AntV X6 Premium Stack - Local) -->
+    <script src="{{ url_for('static', filename='js/lib/lodash.min.js') }}"></script>
+    <!-- AntV X6 Core & Plugins (Local for reliability) -->
+    <script src="{{ url_for('static', filename='js/lib/x6.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/x6-plugin-export.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/x6-plugin-selection.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/x6-plugin-snapline.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/x6-plugin-keyboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/x6-plugin-clipboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/x6-plugin-history.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/x6-plugin-transform.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/pptxgen.bundle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/lib/jspdf.umd.min.js') }}"></script>
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/premium.css') }}">
+</head>
+<body>
+    <div class="main-content">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar glass-panel animate-up">
+            <div class="sidebar-header">
+                <div class="logo-area">
+                    <div class="logo-icon">dN</div>
+                    <div class="logo-text">
+                        <h1 style="font-size: 16px; font-weight: 900; line-height: 1; display: flex; align-items: center; gap: 6px;">
+                            drawNET 
+                            <span style="font-size: 8px; background: #3b82f6; color: white; padding: 2px 5px; border-radius: 4px; vertical-align: middle; letter-spacing: 0;">ALPHA</span>
+                        </h1>
+                        <p style="font-size: 9px; color: #94a3b8; font-weight: 700; text-transform: uppercase;" data-i18n="app_subtitle">v1.0 알파</p>
+                    </div>
+                </div>
+                <button id="sidebar-toggle" class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="asset-search" data-i18n="search_placeholder" placeholder="Search assets...">
+            </div>
+
+            <div class="asset-library">
+                <h3 data-i18n="asset_library">Asset Library</h3>
+                <div class="asset-grid">
+                    <!-- Loaded dynamically from assets.json -->
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div class="footer-btns">
+                    <button id="system-menu-btn" class="footer-btn" title="System" data-i18n="system_menu">
+                        <i class="fas fa-th-large"></i>
+                    </button>
+                    <button id="settings-btn" class="footer-btn" title="Settings" data-i18n="settings">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+                
+                <!-- System Flyout Menu -->
+                <div id="system-flyout" class="flyout-menu glass-panel" style="display: none;">
+                    <!-- File Section -->
+                    <div class="flyout-section">
+                        <div class="section-label" data-i18n="file_menu">File</div>
+                        <button id="new-project" class="flyout-item">
+                            <i class="fas fa-file"></i> <span data-i18n="new_project">New Project</span>
+                        </button>
+                        <button id="import-json" class="flyout-item">
+                            <i class="fas fa-file-import"></i> <span data-i18n="import_json">Load Project (.dnet)</span>
+                        </button>
+                        <button id="export-json" class="flyout-item">
+                            <i class="fas fa-file-export"></i> <span data-i18n="export_json">Save Project (.dnet)</span>
+                        </button>
+                        <button id="export-pptx" class="flyout-item">
+                            <i class="fas fa-file-powerpoint"></i> <span data-i18n="export_pptx">Export PPTX Report</span>
+                        </button>
+                        <button id="export-excel" class="flyout-item">
+                            <i class="fas fa-file-excel"></i> <span data-i18n="export_excel">Export Excel Inventory</span>
+                        </button>
+                        <button id="export-png" class="flyout-item">
+                            <i class="fas fa-file-image"></i> <span data-i18n="export_png">Export PNG Image</span>
+                        </button>
+                        <button id="export-svg" class="flyout-item">
+                            <i class="fas fa-code"></i> <span data-i18n="export_svg">Export SVG Vector</span>
+                        </button>
+                        <button id="export-pdf" class="flyout-item">
+                            <i class="fas fa-file-pdf"></i> <span data-i18n="export_pdf">Export PDF Document</span>
+                        </button>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <!-- Tools Section -->
+                    <div class="flyout-section">
+                        <div class="section-label" data-i18n="tools_menu">Tools</div>
+                        <button id="studio-btn" class="flyout-item">
+                            <i class="fas fa-magic"></i> <span data-i18n="object_studio">Object Studio</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="footer-text">
+                    <p>drawNET</p>
+                    <small>Premium Edition</small>
+                </div>
+                <input type="file" id="import-json-input" style="display: none;" accept=".dnet,.json">
+            </div>
+        </aside>
+
+        <!-- Header -->
+        <header class="header glass-panel animate-up header-compact" style="animation-delay: 0.1s;">
+            <div class="header-info">
+                <h2 id="project-title">Topology_Project_v1</h2>
+                <p><span data-i18n="active_session">ACTIVE SESSION</span> • LOCALHOST:5000</p>
+            </div>
+            <div class="header-search">
+                <i class="fas fa-search"></i>
+                <input type="text" id="global-search" data-i18n="global_search_placeholder" placeholder="Search devices, IPs...">
+            </div>
+            <div class="header-status">
+                <button id="help-btn" class="help-circle-btn" data-i18n-title="help_btn" title="Help">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+                <div class="status-dot online"></div>
+                <span style="font-size: 10px; font-weight: 800; color: #10b981;">CONNECTED</span>
+            </div>
+        </header>
+
+        <!-- Canvas Container -->
+        <div class="main-viewport">
+            <div id="graph-container"></div>
+            <!-- Active Layer Floating Indicator -->
+            <div id="active-layer-indicator" class="active-layer-badge">
+                <span class="badge-label">LAYER:</span>
+                <span id="current-layer-name" class="badge-value">Main Layer</span>
+            </div>
+            <div id="inventory-panel" class="inventory-panel glass-panel" style="display: none;">
+                <div class="inventory-header">
+                    <i class="fas fa-boxes"></i> <span data-i18n="inventory">Inventory</span>
+                </div>
+                <div id="inventory-list" class="inventory-list">
+                    <!-- Dynamic -->
+                </div>
+            </div>
+            <div id="layer-panel" class="layer-panel glass-panel" style="display: none;">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+
+        <!-- Settings Panel (Sliding from right) -->
+        <div id="settings-panel" class="settings-panel glass-panel">
+            <div class="settings-header">
+                <div class="header-title">
+                    <i class="fas fa-cog"></i> 
+                    <span data-i18n="settings">Settings</span>
+                </div>
+                <button id="close-settings-btn" class="close-btn"><i class="fas fa-times"></i></button>
+            </div>
+            
+            <div class="settings-container">
+                <div class="settings-sidebar">
+                    <div class="settings-tab active" data-tab="general">
+                        <i class="fas fa-sliders-h"></i> <span data-i18n="general">General</span>
+                    </div>
+                    <div class="settings-tab" data-tab="workspace">
+                        <i class="fas fa-th"></i> <span data-i18n="workspace">Workspace</span>
+                    </div>
+                    <div class="settings-tab" data-tab="engine">
+                        <i class="fas fa-microchip"></i> <span data-i18n="engine">Engine</span>
+                    </div>
+                    <div class="settings-tab" data-tab="about">
+                        <i class="fas fa-info-circle"></i> <span data-i18n="about">About</span>
+                    </div>
+                </div>
+                
+                <div id="settings-body" class="settings-body">
+                    <!-- Tab content will be rendered here via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="modal-container"></div>
+
+    <!-- Properties Sidebar -->
+    <div id="properties-sidebar">
+        <div class="sidebar-header">
+            <h3 data-i18n="properties_title">Properties</h3>
+            <span class="close-sidebar">&times;</span>
+        </div>
+        <div class="sidebar-content">
+            <!-- Dynamic Content -->
+            <div style="color: #64748b; text-align: center; margin-top: 40px;" data-i18n="select_object_to_edit">Select an object to edit properties</div>
+        </div>
+        <div class="sidebar-footer">
+            <button class="btn-apply" id="sidebar-apply" data-i18n="apply_btn">Close</button>
+        </div>
+    </div>
+
+    <!-- App Logic with cache buster -->
+    <script type="module" src="{{ url_for('static', filename='js/app.js') }}?v=1710712500"></script>
+</body>
+</html>

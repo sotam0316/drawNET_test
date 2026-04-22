@@ -1,0 +1,24 @@
+{
+  "id": "sample_cisco",
+  "name": "Cisco Enterprise Pack",
+  "vendor": "Cisco",
+  "version": "1.0.0",
+  "assets": [
+    {
+      "id": "cisco_router",
+      "label": "Integrated Services Router",
+      "category": "Network",
+      "views": {
+        "icon": "router.svg"
+      }
+    },
+    {
+      "id": "cisco_switch",
+      "label": "Catalyst Switch",
+      "category": "Network",
+      "views": {
+        "icon": "switch.svg"
+      }
+    }
+  ]
+}

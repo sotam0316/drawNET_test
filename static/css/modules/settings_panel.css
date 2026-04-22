@@ -1,0 +1,195 @@
+/* settings_panel.css - Professional Sliding Settings Panel */
+
+.settings-panel {
+    position: fixed;
+    top: 10px;
+    right: -420px; /* Hidden by default */
+    width: 400px;
+    height: calc(100vh - 20px);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.settings-panel.active {
+    right: 10px;
+}
+
+.settings-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--panel-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--text-color);
+}
+
+.header-title i {
+    color: var(--accent-color);
+}
+
+.settings-container {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+}
+
+/* Sidebar Tabs */
+.settings-sidebar {
+    width: 100px;
+    background: var(--item-bg);
+    border-right: 1px solid var(--panel-border);
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+
+.settings-tab {
+    padding: 18px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: var(--sub-text);
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.settings-tab i {
+    font-size: 20px;
+}
+
+.settings-tab span {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.settings-tab:hover {
+    color: var(--text-color);
+    background: var(--item-hover-bg);
+}
+
+.settings-tab.active {
+    color: var(--accent-color);
+    background: rgba(59, 130, 246, 0.1);
+    border-left: 3px solid var(--accent-color);
+}
+
+/* Body Content */
+.settings-body {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    background: rgba(var(--bg-rgb), 0.1);
+}
+
+.settings-section {
+    margin-bottom: 30px;
+    animation: fadeIn 0.3s ease;
+}
+
+.settings-section h3 {
+    font-size: 11px;
+    color: var(--sub-text);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    letter-spacing: 0.8px;
+    font-weight: 800;
+}
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--panel-border);
+}
+
+.setting-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.setting-info .label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.setting-info .desc {
+    font-size: 11px;
+    color: var(--sub-text);
+}
+
+.setting-ctrl select, 
+.setting-ctrl input[type="number"],
+.setting-ctrl input[type="text"] {
+    background: var(--item-bg);
+    border: 1px solid var(--panel-border);
+    color: var(--text-color);
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.setting-ctrl select:focus, 
+.setting-ctrl input:focus {
+    border-color: var(--accent-color);
+}
+
+/* Toggle switch adjustments within settings */
+.toggle-switch {
+    background: var(--item-bg) !important;
+    border: 1px solid var(--panel-border) !important;
+}
+
+.toggle-switch:hover {
+    background: var(--item-hover-bg) !important;
+    border-color: var(--accent-color) !important;
+}
+
+.toggle-switch .label {
+    color: var(--sub-text) !important;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--sub-text);
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.2s;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    background: #ef4444;
+    color: white;
+}
