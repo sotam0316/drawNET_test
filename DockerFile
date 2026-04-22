@@ -1,22 +1,43 @@
-# 1. 파이썬 3.10 슬림 버전
+# 1. 베이스 이미지 설정
+# .so 파일이 Python 3.10용이므로 반드시 3.10 버전을 사용해야 합니다.
 FROM python:3.10-slim
 
-WORKDIR /app
-
-# 2. 시스템 패키지 설치
-# DNS가 해결되었으므로 미러 변경 없이 기본 명령어로 진행합니다.
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libgl1-mesa-glx \
-    libglib2.0-0 \
+# 2. 필수 시스템 패키지 설치
+# 컴파일된 바이너리(.so) 실행에 필요한 라이브러리들을 설치합니다.
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libssl-dev \
+    libffi-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# 3. 파이썬 의존성 설치
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt || pip install flask requests
+# 3. 작업 디렉토리 설정
+WORKDIR /app
 
-# 4. 전체 파일 복사 (컴파일된 .so 파일 포함)
+# 4. 의존성 파일 복사 및 설치
+# 라이브러리 설치를 먼저 해서 빌드 속도를 높입니다.
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+
+# 5. [핵심] 프로젝트 전체 파일 복사
+# 윈도우에서 추가한 static/js/lib 폴더를 포함한 모든 파일을 강제로 복사합니다.
 COPY . .
 
-# 5. 실행 설정
+# 확인용 (이게 에러 나면 빌드가 중단되니 바로 알 수 있습니다)
+RUN ls -R /app/static/js/lib
+
+# 6. 환경 변수 설정
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV FLASK_APP=app.py
+
+# 7. 실행 권한 부여 (리눅스 환경 대응)
+# 혹시 모를 권한 문제를 방지하기 위해 정적 파일 경로에 권한을 줍니다.
+RUN chmod -R 755 /app/static
+
+# 8. 포트 노출
 EXPOSE 5000
+
+# 9. 실행 명령
+# gunicorn 대신 flask run을 사용하여 디버깅 모드로 실행합니다.
 CMD ["python", "app.py"]
