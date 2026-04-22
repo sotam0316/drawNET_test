@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  drawnet-app:
+    build: .
+    container_name: drawnet-service
+    # 호스트 네트워크를 직접 사용하여 가상화 오버헤드 및 포트 문제를 해결합니다.
+    network_mode: host
+    restart: always
+    environment:
+      - TZ=Asia/Seoul
+      - FLASK_ENV=production
+      # 로그가 버퍼링 없이 즉시 터미널에 찍히도록 설정 (디버깅 필수)
+      - PYTHONUNBUFFERED=1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

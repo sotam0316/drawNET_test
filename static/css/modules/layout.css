@@ -1,0 +1,84 @@
+/* Main Area Adjustment */
+.header, .editor-panel {
+    left: 284px; /* Default sidebar width + margin */
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sidebar.collapsed ~ .header,
+.sidebar.collapsed ~ .editor-panel,
+.sidebar.collapsed ~ .main-viewport {
+    left: 104px; /* Collapsed sidebar width + margin */
+}
+.main-viewport {
+    position: absolute;
+    top: 0;
+    left: 284px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
+    background-color: var(--bg-color);
+    display: flex;
+    /* justify-content and align-items removed to allow margin:auto to handle centering with overflow */
+    padding: 60px; /* Space for shadow and boundaries */
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    scrollbar-gutter: stable;
+}
+
+#cy {
+    flex-shrink: 0;
+    background-color: var(--canvas-bg); /* Theme-aware paper background */
+    position: relative;
+    /* Sizes will be set by JS or default to 100% */
+    width: 100%;
+    height: 100%;
+    margin: auto; /* Handles centering when sized fixed (A3/A4) */
+    box-shadow: 0 0 40px rgba(0,0,0,0.1);
+    border: 1px solid var(--panel-border); /* Visible canvas boundary */
+}
+
+#cy.grid-solid {
+    background-image: 
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
+}
+
+#cy.grid-dashed {
+    background-image: 
+        radial-gradient(var(--grid-color) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
+}
+
+/* Inventory Panel Overlay (Legacy - handled in analysis.css) */
+/* .inventory-panel { ... } */
+
+.inventory-header {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--sub-text);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.inventory-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-color);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.inventory-item .count {
+    background: var(--accent-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 800;
+}

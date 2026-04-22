@@ -1,0 +1,70 @@
+{
+  "categories": [
+    {
+      "id": "Network",
+      "label": "Network Devices",
+      "icon": "router.svg"
+    },
+    {
+      "id": "Security",
+      "label": "Security & Firewalls",
+      "icon": "firewall.svg"
+    }
+  ],
+  "assets": [
+    {
+      "id": "router",
+      "type": "Router",
+      "category": "Network",
+      "label": "Standard Router",
+      "path": "router.svg",
+      "format": "svg",
+      "vendor": "Cisco"
+    },
+    {
+      "id": "switch",
+      "type": "Switch",
+      "category": "Network",
+      "label": "L3 Switch",
+      "path": "switch.svg",
+      "format": "svg",
+      "vendor": "Cisco"
+    },
+    {
+      "id": "firewall_cisco",
+      "type": "Firewall",
+      "category": "Security",
+      "label": "Cisco Firewall",
+      "path": "firewall.svg",
+      "format": "svg",
+      "vendor": "Cisco"
+    },
+    {
+      "id": "firewall_png",
+      "type": "F/W",
+      "category": "Security",
+      "label": "Legacy F/w",
+      "path": "firewall.png",
+      "format": "png",
+      "vendor": "Generic"
+    },
+    {
+      "id": "server",
+      "type": "Server",
+      "category": "Compute",
+      "label": "Enterprise Server",
+      "path": "server.svg",
+      "format": "svg",
+      "vendor": "Generic"
+    },
+    {
+      "id": "cloud",
+      "type": "Internet",
+      "category": "External",
+      "label": "External Cloud",
+      "path": "cloud.svg",
+      "format": "svg",
+      "vendor": "Generic"
+    }
+  ]
+}

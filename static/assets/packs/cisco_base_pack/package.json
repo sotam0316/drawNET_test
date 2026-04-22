@@ -1,0 +1,125 @@
+{
+    "id": "cisco_base_pack",
+    "name": "cisco_pack",
+    "vendor": "Unknown",
+    "version": "1.0.0",
+    "assets": [
+        {
+            "id": "cisco_firewall",
+            "label": "Cisco Firewall",
+            "category": "Security",
+            "views": {
+                "icon": "cisco_firewall.png",
+                "front": "cisco_firewall.png"
+            }
+        },
+        {
+            "id": "cisco_firewallservicemodule",
+            "label": "Cisco Firewall service module",
+            "category": "Security",
+            "views": {
+                "icon": "cisco_firewallservicemodule.png",
+                "front": "cisco_firewallservicemodule.png"
+            }
+        },
+        {
+            "id": "cisco_generic",
+            "label": "Cisco Generic",
+            "category": "Other",
+            "views": {
+                "icon": "cisco_generic.png",
+                "front": "cisco_generic.png"
+            }
+        },
+        {
+            "id": "cisco_iosslb",
+            "label": "Cisco Iosslb",
+            "category": "Network",
+            "views": {
+                "icon": "cisco_iosslb.png",
+                "front": "cisco_iosslb.png"
+            }
+        },
+        {
+            "id": "cisco_laptop",
+            "label": "Cisco Laptop",
+            "category": "Device",
+            "views": {
+                "icon": "cisco_laptop.png",
+                "front": "cisco_laptop.png"
+            }
+        },
+        {
+            "id": "cisco_printer",
+            "label": "Cisco Printer",
+            "category": "Device",
+            "views": {
+                "icon": "cisco_printer.png",
+                "front": "cisco_printer.png"
+            }
+        },
+        {
+            "id": "cisco_wirelessrouter",
+            "label": "Cisco Wirelessrouter",
+            "category": "Network",
+            "views": {
+                "icon": "cisco_wirelessrouter.png",
+                "front": "cisco_wirelessrouter.png"
+            }
+        },
+        {
+            "id": "cisco_wwwserver",
+            "label": "Cisco Wwwserver",
+            "category": "Device",
+            "views": {
+                "icon": "cisco_wwwserver.png",
+                "front": "cisco_wwwserver.png"
+            }
+        },
+        {
+            "id": "cisco_contentservicerouter",
+            "label": "Cisco Contentservicerouter",
+            "category": "Network",
+            "views": {
+                "icon": "cisco_contentservicerouter.png",
+                "front": "cisco_contentservicerouter.png"
+            }
+        },
+        {
+            "id": "cisco_database",
+            "label": "Cisco Database",
+            "category": "DBMS",
+            "views": {
+                "icon": "cisco_database.png",
+                "front": "cisco_database.png"
+            }
+        },
+        {
+            "id": "cisco_mgx8000",
+            "label": "Cisco Mgx8000",
+            "category": "Network",
+            "views": {
+                "icon": "cisco_mgx8000.png",
+                "front": "cisco_mgx8000.png"
+            }
+        },
+        {
+            "id": "cisco_l2_100base",
+            "label": "Cisco L2 ",
+            "category": "Network",
+            "views": {
+                "icon": "cisco_l2_100base.png",
+                "front": "cisco_l2_100base.png"
+            }
+        },
+        {
+            "id": "cisco_cloud",
+            "label": "Cisco Cloud",
+            "category": "Cloud",
+            "views": {
+                "icon": "cisco_cloud.png",
+                "front": "cisco_cloud.png"
+            }
+        }
+    ]
+}

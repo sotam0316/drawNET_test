@@ -1,0 +1,68 @@
+/* Sidebar Footer Settings */
+.sidebar-footer {
+    padding: 20px 24px;
+    border-top: 1px solid var(--panel-border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto; /* Push to bottom */
+}
+
+.footer-btns {
+    display: flex;
+    gap: 8px;
+}
+
+.footer-btn {
+    width: 32px;
+    height: 32px;
+    background: var(--item-bg);
+    border: none;
+    border-radius: 8px;
+    color: var(--sub-text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.footer-btn:hover {
+    background: var(--item-hover-bg);
+    color: white;
+}
+
+#settings-btn:hover {
+    transform: rotate(45deg);
+}
+
+#system-menu-btn.active {
+    background: var(--accent-color);
+    color: white;
+}
+
+.footer-text {
+    flex: 1;
+}
+
+.footer-text p {
+    font-size: 11px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.footer-text small {
+    font-size: 9px;
+    color: var(--sub-text);
+}
+
+.sidebar.collapsed .sidebar-footer {
+    padding: 20px 0;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sidebar.collapsed .footer-text {
+    display: none;
+}

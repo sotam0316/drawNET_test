@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>drawNET Studio | Asset Management</title>
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/logo.svg') }}">
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lib/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/lib/google-fonts.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/premium.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/studio.css') }}">
+</head>
+<body class="studio-body">
+    <div class="studio-layout">
+        <header class="studio-header">
+            <div class="studio-header-left">
+                <a href="/" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    <span>Back to Designer</span>
+                </a>
+                <div class="header-metadata">
+                    <div class="meta-input-group">
+                        <label class="meta-label">PACK ID</label>
+                        <input type="text" id="pack-id" class="meta-input highlight" placeholder="my_vendor_pack">
+                    </div>
+                    <div class="meta-input-group">
+                        <label class="meta-label">PACK NAME</label>
+                        <input type="text" id="pack-name" class="meta-input" placeholder="My Enterprise Pack">
+                    </div>
+                    <div class="meta-input-group">
+                        <label class="meta-label">PACK VENDOR</label>
+                        <input type="text" id="pack-vendor" class="meta-input" placeholder="Cisco">
+                    </div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="build-btn" class="btn-primary">
+                    <i class="fas fa-box-open"></i> Build Package
+                </button>
+            </div>
+        </header>
+
+        <!-- Left: Source Panel -->
+        <aside class="panel source-panel">
+            <div class="panel-header">
+                Sources
+                <div class="controls">
+                    <i class="fas fa-plus pointer"></i>
+                </div>
+            </div>
+            <div id="load-package-area"></div>
+            <div class="panel-content">
+                <div class="upload-area" id="drop-zone">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p class="upload-text">Drag folder or images here</p>
+                    <small class="upload-hint">or click to browse</small>
+                    <input type="file" id="folder-input" webkitdirectory style="display: none;">
+                    <input type="file" id="file-input" multiple style="display: none;">
+                </div>
+                <ul class="source-list" id="source-list">
+                    <!-- Dynamic -->
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Center: Workspace -->
+        <main class="panel-content workspace">
+            <div class="asset-grid" id="asset-grid">
+                <!-- Example Card -->
+                <div class="asset-card">
+                    <div class="asset-preview">
+                        <i class="fas fa-image placeholder-icon"></i>
+                    </div>
+                    <div class="asset-name">Waiting for sources...</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Right: Property Panel -->
+        <aside class="panel property-panel">
+            <div class="panel-header">Properties</div>
+            <div class="panel-content">
+                <div class="property-empty">
+                    <i class="fas fa-info-circle"></i>
+                    <p>Select an asset to edit or convert</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+    <script type="module" src="{{ url_for('static', filename='js/modules/studio/index.js') }}"></script>
+</body>
+</html>

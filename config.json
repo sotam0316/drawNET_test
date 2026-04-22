@@ -1,0 +1,8 @@
+{
+    "mousewheel": {
+        "factor": 1.05,
+        "minScale": 0.1,
+        "maxScale": 10.0
+    },
+    "log_level": "info"
+}

@@ -1,0 +1,22 @@
+# 1. 파이썬 3.10 슬림 버전
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# 2. 시스템 패키지 설치
+# DNS가 해결되었으므로 미러 변경 없이 기본 명령어로 진행합니다.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+# 3. 파이썬 의존성 설치
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt || pip install flask requests
+
+# 4. 전체 파일 복사 (컴파일된 .so 파일 포함)
+COPY . .
+
+# 5. 실행 설정
+EXPOSE 5000
+CMD ["python", "app.py"]

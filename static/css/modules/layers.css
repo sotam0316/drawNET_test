@@ -1,0 +1,318 @@
+/* layers.css - Layer Management Panel Styles */
+
+.layer-panel {
+    position: absolute;
+    bottom: 24px;
+    right: 300px; /* Offset from Inventory */
+    width: 250px;
+    max-height: 400px;
+    z-index: 1000;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: auto !important;
+}
+
+.layer-item.dragging {
+    opacity: 0.4;
+    background: var(--primary-color-dim);
+    border: 1px dashed var(--primary-color);
+}
+
+.drag-handle {
+    cursor: grab;
+    color: #64748b;
+    margin-right: 12px;
+    font-size: 12px;
+}
+
+.layer-item:active .drag-handle {
+    cursor: grabbing;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--panel-border);
+    padding-bottom: 10px;
+}
+
+.panel-header i {
+    color: var(--accent-color);
+}
+
+.layer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+}
+
+.layer-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: var(--item-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.layer-item:hover {
+    background: var(--item-hover-bg);
+    border-color: var(--accent-color);
+}
+
+.layer-item.active {
+    border-color: var(--accent-color);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.layer-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.layer-name {
+    flex: 1;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.layer-actions {
+    display: flex;
+    gap: 4px;
+}
+
+.layer-actions button {
+    background: none;
+    border: none;
+    color: var(--sub-text);
+    cursor: pointer;
+    font-size: 12px;
+    padding: 2px;
+}
+
+.layer-actions button:hover {
+    color: var(--accent-color);
+}
+
+.panel-header button {
+    background: var(--accent-color);
+    color: white !important;
+    border: none;
+    border-radius: 4px;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+.panel-header button:hover {
+    background: #2563eb;
+    transform: scale(1.1);
+}
+
+.panel-header button i {
+    color: white !important; /* Force icon color */
+}
+
+.mini-btn:hover {
+    background: #2563eb;
+}
+
+.layer-footer {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--panel-border);
+}
+
+.opacity-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--sub-text);
+}
+
+.opacity-control input[type="range"] {
+    flex: 1;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+    appearance: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.opacity-control input[type="range"]::-webkit-slider-runnable-track {
+    background: linear-gradient(to right, var(--accent-color), #ddd);
+    height: 6px;
+    border-radius: 3px;
+}
+
+.opacity-control input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: var(--accent-color);
+    border: 2px solid white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -4px; /* Align with track */
+}
+
+#opacity-val {
+    min-width: 30px;
+    text-align: right;
+}
+
+.layer-rename-input {
+    background: white;
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+    padding: 2px 4px;
+    font-size: 13px;
+    width: 100px;
+    outline: none;
+    color: var(--main-text);
+}
+/* Trash Bin for Deletion */
+.layer-trash {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1.5px dashed rgba(239, 68, 68, 0.4);
+    border-radius: 10px;
+    color: #ef4444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.layer-trash i {
+    font-size: 14px;
+}
+
+.layer-trash.drag-over {
+    background: #ef4444;
+    color: white;
+    border-color: #ef4444;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+/* Visual Nudge: Pulse Animation */
+@keyframes nudgePulse {
+    0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+
+.pulse-nudge {
+    animation: nudgePulse 1.5s infinite;
+    border-radius: 4px;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+/* Mini Guide Tooltip */
+.nudge-tooltip {
+    position: absolute;
+    left: 45px;
+    background: #3b82f6;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    animation: tooltipFadeIn 0.3s ease-out forwards;
+    z-index: 1001;
+}
+
+.nudge-tooltip::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 4px solid #3b82f6;
+}
+
+@keyframes tooltipFadeIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes tooltipFadeOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(5px); }
+}
+
+/* Active Layer Floating Badge */
+.active-layer-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(12px);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeInDown 0.5s ease-out;
+}
+
+.active-layer-badge .badge-label {
+    font-size: 9px;
+    font-weight: 800;
+    color: #94a3b8;
+    letter-spacing: 1px;
+}
+
+.active-layer-badge .badge-value {
+    font-size: 13px;
+    font-weight: 900;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+@keyframes badgePop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.badge-pop {
+    animation: badgePop 0.3s ease-out;
+}
